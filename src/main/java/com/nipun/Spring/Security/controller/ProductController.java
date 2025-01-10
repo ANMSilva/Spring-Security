@@ -2,9 +2,7 @@ package com.nipun.Spring.Security.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +22,33 @@ public class ProductController {
                     new Product("test_name_3", "test_description_3")
             ));
 
-    @RequestMapping("/list")
+    @GetMapping
     public List<Product> list() {
         return productList;
     }
 
-    @RequestMapping("/add")
-    public Product addProduct(@PathVariable String name, @PathVariable String description) {
-        Product product = new Product(name, description);
+    @PostMapping
+    public Product addProduct(@RequestBody Product request) {
+        Product product = new Product(request.name(), request.description());
         productList.add(product);
         return product;
     }
+
+    /**
+     * CSRF Protection
+     * Spring Security enables CSRF protection by default for non-GET methods (like POST, PUT, DELETE):
+     *
+     * If CSRF protection is active and you do not include a valid CSRF token in your POST request, it will be blocked.
+     * GET requests are generally exempt from CSRF checks because they are not intended to modify server state.
+     *
+     * @Override
+     * protected void configure(HttpSecurity http) throws Exception {
+     *     http
+     *         .csrf().disable()  // Disable CSRF for APIs
+     *         .authorizeRequests()
+     *         .antMatchers("/**").authenticated()
+     *         .and()
+     *         .httpBasic();
+     * }
+     * */
 }
