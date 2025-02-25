@@ -6,7 +6,10 @@ spring:
     username: postgres
     password: pwd@123
     driver-class-name: org.postgresql.Driver
-
+  security:
+    user:
+      name: nipun_s
+      password: password
   jpa:
     properties:
       hibernate:

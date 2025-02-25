@@ -49,14 +49,14 @@ public class WelcomeController {
     //Authentication types
     /**
      * When to Use Each?
+     *
      * Basic Authentication:
-     *
      * Use for simple systems, internal tools, or as a quick solution for APIs with low security needs.
+     *
      * CSRF Protection:
-     *
      * Essential for session-based applications with web forms to prevent CSRF attacks.
-     * JWT Authentication:
      *
+     * JWT Authentication:
      * Ideal for modern web and mobile applications, especially those requiring stateless authentication and scalability.
      * */
 
